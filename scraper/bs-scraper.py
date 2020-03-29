@@ -38,9 +38,8 @@ def _get_information(url: str) -> List[dict]:
     """
     content = _get_page(url= url)
     soup = BeautifulSoup(content, 'html5lib')
-    tables = soup.find_all('table')
-    cases_table = tables[-1]
-    c_t_rows = cases_table.find_all('tr')
+    cases_div = soup.find('div', attrs={'id':'cases'})
+    c_t_rows = cases_div.find_all('tr')
     c_t_header = [e.text for e in c_t_rows[0].find_all('th')]
     info = []
     rows_not_required = [0,28,29]
